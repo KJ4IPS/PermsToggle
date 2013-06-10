@@ -1,0 +1,14 @@
+package net.q_silver.kjperms.permstoggle;
+
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public final class PermsToggle extends JavaPlugin {
+	
+	@Override
+	public void onEnable(){
+		getCommand("wgo").setExecutor(new WorldGuardToggler(this));
+	}
+	
+}

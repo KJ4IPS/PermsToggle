@@ -1,0 +1,10 @@
+package net.q_silver.kjperms.permstoggle;
+
+import org.bukkit.plugin.java.JavaPlugin;
+
+public final class PermsToggle extends JavaPlugin {
+	onEnable(){
+			;
+	}
+	}
+}

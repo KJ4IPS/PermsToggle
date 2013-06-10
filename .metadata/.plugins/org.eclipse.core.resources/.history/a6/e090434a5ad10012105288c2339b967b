@@ -1,0 +1,51 @@
+package net.q_silver.kjperms.permstoggle;
+
+import java.util.HashMap;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public final class PermsToggle extends JavaPlugin {
+	
+	HashMap<String,PermissionAttachment> AffectedPlayers = new HashMap<String,PermissionAttachment>();
+	
+	@Override
+	public void onEnable(){
+		getCommand("wgo").setExecutor(new WorldGuardToggler(this));
+	}
+	
+	@Override
+	public void onDisable(){
+		stripAllPerms();
+	}
+	
+	private void stripAllPerms(){
+		for (String player : this.AffectedPlayers.keySet()){
+			stripPerms(Bukkit.getPlayerExact(player));
+		}
+	}
+	
+	private void stripPerms(Player player){
+		if(this.AffectedPlayers.containsKey(player.getName())){
+			player.removeAttachment(this.AffectedPlayers.get(player.getName()));
+		}
+	}
+	
+	public static PermissionAttachment getPAbyName(String pname){
+		if(this.AffectedPlayers.containsKey(pname)){
+			return this.AffectedPlayers.get(pname);
+		}else{
+			PermissionAttachment pa;
+			Player pl;
+			pl = Bukkit.getPlayer(pname);
+			if(pl == null){
+				return (PermissionAttachment) null;
+			}
+			pa = pl.addAttachment(this);
+			this.AffectedPlayers.put(pname, pa);
+			return pa;
+		}
+	}
+}

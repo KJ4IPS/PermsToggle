@@ -1,0 +1,9 @@
+name: PermsToggle
+mail: net.q_silver.kjperms.permstoggle.PermsToggle
+version: 0.0.1
+commands:
+  wgo:
+    description: Toggle WorldGuard Override
+    usage: /wgo
+    permission: toggleperms.wgo
+    permission-message: Sorry, you can't do that!

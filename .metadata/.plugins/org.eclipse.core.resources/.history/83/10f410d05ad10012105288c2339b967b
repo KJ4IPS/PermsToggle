@@ -1,0 +1,34 @@
+package net.q_silver.kjperms.permstoggle;
+
+import org.bukkit.command.Command;
+
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.permissions.PermissionAttachment;
+
+import net.q_silver.kjperms.permstoggle.PermsToggle;
+
+public class WorldGuardToggler implements CommandExecutor {
+
+	private PermsToggle plugin = new PermsToggle() ;
+	
+	public WorldGuardToggler(PermsToggle plugin){
+		this.plugin = plugin;
+	}
+	
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+			//we can assume that the command was /wgo, and that permissions are correct
+		private String PermToToggle = "worldguard.region.override";
+		if (!(sender instanceof Player)){
+			sender.sendMessage("Sorry, this only makes sense with a player!");
+			return true;
+		}
+		Player player = (Player) sender;
+			PermissionAttachment pa = plugin.getPAbyName(player.getName());
+			
+		return false;
+	}
+
+}
